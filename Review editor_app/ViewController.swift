@@ -30,11 +30,27 @@ class ViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         let review = reviews[indexPath.row]
-        cell.textLabel?.text = "\(review[0]): \(review[1])"
-        
+        cell.textLabel?.attributedText = makeAttributedString(title: review[0], subtitle: review[1])
+ 
         return cell
-        
     }
+    
+    func makeAttributedString(title: String, subtitle: String) -> NSAttributedString {
+        
+        let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline), NSAttributedString.Key.foregroundColor: UIColor.blue]
+        
+        let subtitleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline)]
+        
+        let titleString = NSMutableAttributedString(string: subtitle, attributes: titleAttributes)
+        let subtitleString = NSAttributedString(string: subtitle, attributes: subtitleAttributes)
+        
+        titleString.append(subtitleString)
+        
+        return titleString
+    }
+    
+    
+    
+    
+    
 }
-
-
